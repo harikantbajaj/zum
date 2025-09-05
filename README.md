@@ -10,7 +10,7 @@
 
 *Your ride, on demand — fast, safe, and seamless!*
 
-[🚀 Live Demo](#) | [📖 Documentation](#) | [🐛 Report Bug](https://github.com/yourusername/RideX/issues) | [✨ Request Feature](https://github.com/yourusername/RideX/issues)
+
 
 </div>
 
@@ -237,6 +237,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
+
+
+<img width="1919" height="911" alt="Screenshot 2025-09-05 131053" src="https://github.com/user-attachments/assets/7c981f09-f90e-42fd-86fa-eba0eb98421a" />
+<img width="1919" height="920" alt="Screenshot 2025-09-05 131104" src="https://github.com/user-attachments/assets/df8c1069-d1d3-499f-83c7-23fc0c6dab03" />
+<img width="1919" height="865" alt="Screenshot 2025-09-05 131116" src="https://github.com/user-attachments/assets/828d7b48-7993-4f5b-b576-c8e2ba34d92d" />
+
 ## 🙏 Acknowledgments
 
 - Thanks to the open-source community for amazing tools and libraries
@@ -254,3 +260,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 [⬆️ Back to Top](#-Zum---revolutionizing-ride-sharing)
 
 </div>
+
