@@ -70,7 +70,7 @@ const Index = () => {
                 Your ride, on <span className="text-primary">demand</span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto lg:mx-0">
-                Experience the future of transportation with RideX. Request a ride at the tap of a button and get where you need to go—safely, reliably, and affordably.
+                Experience the future of transportation with Zum. Request a ride at the tap of a button and get where you need to go—safely, reliably, and affordably.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 {currentUser ? (
@@ -159,7 +159,7 @@ const Index = () => {
         {/* Features section */}
         <section className="px-4 py-20 mx-auto max-w-7xl">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold">Why choose RideX?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold">Why choose Zum?</h2>
             <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
               We provide a seamless experience for both riders and drivers, focusing on safety, speed, and satisfaction.
             </p>
@@ -219,7 +219,7 @@ const Index = () => {
               <div className="order-1 lg:order-2 space-y-6">
                 <h2 className="text-3xl md:text-4xl font-bold">Download our app</h2>
                 <p className="text-lg text-muted-foreground">
-                  Get the full RideX experience on your mobile device. Request rides, track your driver, and manage your account with our intuitive app.
+                  Get the full Zum experience on your mobile device. Request rides, track your driver, and manage your account with our intuitive app.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <button className="flex items-center justify-center gap-2 px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors">
@@ -247,7 +247,7 @@ const Index = () => {
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold">What our users say</h2>
             <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-              Hear from riders and drivers who have experienced RideX firsthand.
+              Hear from riders and drivers who have experienced Zum firsthand.
             </p>
           </div>
           
@@ -283,7 +283,7 @@ const Index = () => {
                 </div>
               </div>
               <p className="text-muted-foreground">
-                "I use RideX daily for my commute. The drivers are always professional and the cars are clean. The app is super intuitive and I can always count on a quick pickup."
+                "I use Zum daily for my commute. The drivers are always professional and the cars are clean. The app is super intuitive and I can always count on a quick pickup."
               </p>
             </div>
             
@@ -318,7 +318,7 @@ const Index = () => {
                 </div>
               </div>
               <p className="text-muted-foreground">
-                "As a driver, RideX gives me the flexibility to work on my own schedule. The app is easy to use and the support team is always responsive when I need help."
+                "As a driver, Zum gives me the flexibility to work on my own schedule. The app is easy to use and the support team is always responsive when I need help."
               </p>
             </div>
             
@@ -353,7 +353,7 @@ const Index = () => {
                 </div>
               </div>
               <p className="text-muted-foreground">
-                "I love that I can see the exact fare before requesting a ride. The drivers have always been friendly and the cars are comfortable. RideX is my go-to ride service!"
+                "I love that I can see the exact fare before requesting a ride. The drivers have always been friendly and the cars are comfortable. Zum is my go-to ride service!"
               </p>
             </div>
           </div>
@@ -362,9 +362,9 @@ const Index = () => {
         {/* CTA Section */}
         <section className="px-4 py-20 bg-primary text-primary-foreground">
           <div className="mx-auto max-w-7xl text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to experience RideX?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to experience Zum?</h2>
             <p className="text-lg mb-8 max-w-2xl mx-auto opacity-90">
-              Join millions of riders and drivers who choose RideX every day. Get started with just a few taps.
+              Join millions of riders and drivers who choose Zum every day. Get started with just a few taps.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
@@ -430,7 +430,7 @@ const Index = () => {
           </div>
           
           <div className="mt-12 border-t border-gray-800 pt-8">
-            <p className="text-center text-gray-400">&copy; {new Date().getFullYear()} RideX. All rights reserved.</p>
+            <p className="text-center text-gray-400">&copy; {new Date().getFullYear()} Zum. All rights reserved.</p>
           </div>
         </div>
       </footer>

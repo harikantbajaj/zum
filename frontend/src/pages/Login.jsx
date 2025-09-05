@@ -105,7 +105,7 @@ const Login = () => {
             </svg>
           </div>
           <h2 className="text-3xl font-bold">
-            {isLogin ? "Sign in to RideX" : "Create your RideX account"}
+            {isLogin ? "Sign in to Zum" : "Create your Zum account"}
           </h2>
           <p className="mt-2 text-muted-foreground">
             {isLogin ? "Enter your credentials to access your account" : "Fill in your information to create an account"}
