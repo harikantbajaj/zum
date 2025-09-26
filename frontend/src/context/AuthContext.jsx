@@ -135,23 +135,38 @@ export function AuthProvider({ children }) {
   // Toggle online status (for drivers)
   const toggleOnlineStatus = async (isOnline) => {
     if (!currentUser) return;
-    
+
     try {
       const response = await userAPI.toggleOnlineStatus(isOnline);
       setCurrentUser(prev => ({
         ...prev,
         isOnline: response.data.isOnline
       }));
-      
+
       if (isOnline) {
         toast.success("You are now online and can receive ride requests");
       } else {
         toast.info("You are now offline");
       }
-      
+
       return response.data;
     } catch (error) {
       console.error('Error toggling online status:', error);
+      throw error;
+    }
+  };
+
+  // Refetch current user data from server
+  const refetchUser = async () => {
+    try {
+      const response = await userAPI.getCurrentUser();
+      setCurrentUser(response.data);
+      return response.data;
+    } catch (error) {
+      console.error('Error refetching user:', error);
+      if (error.response?.status === 401) {
+        logout();
+      }
       throw error;
     }
   };
@@ -167,7 +182,8 @@ export function AuthProvider({ children }) {
     updateUserInfo,
     logout,
     updateLocation,
-    toggleOnlineStatus
+    toggleOnlineStatus,
+    refetchUser
   };
 
   return (

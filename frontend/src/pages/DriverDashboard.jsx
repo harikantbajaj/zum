@@ -17,6 +17,8 @@ const DriverDashboard = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [processingRideId] = useState(null);
+
+  const handleVehicleComplete = () => navigate('/driver');
   
 
   
@@ -41,7 +43,7 @@ const DriverDashboard = () => {
         <Route path="/" element={<DriverHome />} />
         <Route path="/earnings" element={<DriverEarnings />} />
         <Route path="/profile" element={<DriverProfile />} />
-        <Route path="/vehicle_details" element={<VehicleDetailsForm />} />
+        <Route path="/vehicle_details" element={<VehicleDetailsForm onComplete={handleVehicleComplete} />} />
         <Route path="*" element={<Navigate to="/driver" replace />} />
       </Routes>
     </div>

@@ -100,6 +100,11 @@ router.get('/nearby-drivers', auth, async (req, res) => {
 });
 
 router.post('/vehicle_details', auth, async (req, res) => {
+  // Only drivers can update vehicle details
+  if (req.userType !== 'driver') {
+    return res.status(403).json({ message: 'Only drivers can update vehicle details' });
+  }
+
   const { vehicle, vehicleType } = req.body;
 
   if (!vehicle || !vehicle.make || !vehicle.model || !vehicle.licensePlate) {

@@ -1,9 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
+import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { userAPI } from '../api/api';
 
 const VehicleDetailsForm = ({ onComplete, existingData }) => {
+  const { refetchUser } = useAuth();
+  const navigate = useNavigate();
   const [vehicleData, setVehicleData] = useState({
     make: '',
     model: '',
@@ -74,7 +78,12 @@ const VehicleDetailsForm = ({ onComplete, existingData }) => {
       });
 
       toast.success('Vehicle details saved successfully');
-      if (onComplete) onComplete(vehicleData);
+      await refetchUser();
+      if (onComplete) {
+        onComplete(vehicleData);
+      } else {
+        navigate('/driver');
+      }
     } catch (error) {
       console.error('Error saving vehicle details:', error);
       toast.error('Failed to save vehicle details');
