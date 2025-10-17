@@ -5,7 +5,6 @@ import { io } from 'socket.io-client';
 
 // Create socket.io connection
 const socketUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || socketUrl;
 export const socket = io(socketUrl, {
   autoConnect: false,
   reconnection: true
@@ -13,7 +12,7 @@ export const socket = io(socketUrl, {
 
 // Create an axios instance
 const api = axios.create({
-  baseURL: `${apiBaseUrl}/api`,
+  baseURL: `${socketUrl}/api`,
   headers: {
     'Content-Type': 'application/json'
   },
