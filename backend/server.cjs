@@ -41,12 +41,30 @@ const startServer = async () => {
 
     console.log('Connecting to MongoDB...');
 
-    // Connect to MongoDB
+    // Connect to MongoDB with production settings
     await mongoose.connect(mongoUri, {
       serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
+      maxPoolSize: 10, // Maintain up to 10 socket connections
+      serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
+      socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
+      bufferCommands: false, // Disable mongoose buffering
+      bufferMaxEntries: 0, // Disable mongoose buffering
     });
 
     console.log('Connected to MongoDB');
+
+    // Handle MongoDB connection events
+    mongoose.connection.on('error', (err) => {
+      console.error('MongoDB connection error:', err);
+    });
+
+    mongoose.connection.on('disconnected', () => {
+      console.log('MongoDB disconnected');
+    });
+
+    mongoose.connection.on('reconnected', () => {
+      console.log('MongoDB reconnected');
+    });
 
     // Make io accessible to route handlers
     app.use((req, res, next) => {
@@ -69,7 +87,28 @@ const startServer = async () => {
     const PORT = process.env.PORT || 5000;
     server.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
+      console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
       console.log(`SMS notifications: ${process.env.TWILIO_ACCOUNT_SID ? 'ENABLED' : 'DISABLED (dev mode)'}`);
+      console.log(`Frontend URL: ${process.env.FRONTEND_URL || 'not set'}`);
+    });
+
+    // Graceful shutdown handling
+    process.on('SIGTERM', async () => {
+      console.log('SIGTERM received, shutting down gracefully');
+      server.close(async () => {
+        console.log('HTTP server closed');
+        await mongoose.connection.close();
+        process.exit(0);
+      });
+    });
+
+    process.on('SIGINT', async () => {
+      console.log('SIGINT received, shutting down gracefully');
+      server.close(async () => {
+        console.log('HTTP server closed');
+        await mongoose.connection.close();
+        process.exit(0);
+      });
     });
   } catch (err) {
     console.error('Server startup error:', err);

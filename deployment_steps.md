@@ -39,10 +39,7 @@ Create/update the following environment variables in Vercel:
 1. Update API base URL to production backend
 2. Ensure build scripts are correct
 
-## Step 4: Deploy to Vercel
-
-### Recommended Approach: Deploy Frontend to Vercel, Backend to Railway/Render
-Since Socket.io requires persistent connections not well-supported on Vercel:
+## Step 4: Deploy Frontend to Vercel
 
 1. **Install Vercel CLI:**
    ```bash
@@ -56,18 +53,54 @@ Since Socket.io requires persistent connections not well-supported on Vercel:
    ```
    - Follow prompts to link your GitHub repo
    - Set environment variables in Vercel dashboard:
-     - `VITE_API_BASE_URL`: Your backend URL (from Railway/Render)
-     - `VITE_BACKEND_URL`: Your backend URL (for Socket.io)
+     - `VITE_API_BASE_URL`: Your Railway backend URL (will get this after Railway deployment)
+     - `VITE_BACKEND_URL`: Your Railway backend URL (for Socket.io)
 
-3. **Deploy Backend to Railway/Render:**
-   - Create account on Railway.app or Render.com
-   - Connect your GitHub repo
-   - Set environment variables:
-     - `MONGODB_URI`: Your MongoDB Atlas connection string
-     - `JWT_SECRET`: Secure random string
-     - `FRONTEND_URL`: Your Vercel frontend URL
-     - `PORT`: 5000
-   - Deploy and get the backend URL
+## Step 5: Deploy Backend to Railway
+
+### Railway Deployment Steps:
+
+1. **Create Railway Account:**
+   - Go to https://railway.app
+   - Sign up with GitHub account
+
+2. **Create New Project:**
+   - Click "New Project"
+   - Choose "Deploy from GitHub repo"
+   - Connect your GitHub repository
+   - Select the repository containing your Zum app
+
+3. **Configure Project Settings:**
+   - Railway will auto-detect your Node.js app
+   - Set the **Root Directory** to `backend`
+   - The build and start commands will be auto-detected from `package.json`
+
+4. **Set Environment Variables:**
+   In Railway dashboard → Variables tab, add:
+   ```
+   MONGODB_URI=your_mongodb_atlas_connection_string
+   JWT_SECRET=your_secure_random_jwt_secret
+   FRONTEND_URL=https://your-vercel-frontend-url.vercel.app
+   PORT=5000
+   NODE_ENV=production
+   ```
+
+5. **Deploy:**
+   - Click "Deploy"
+   - Railway will build and deploy your backend
+   - Once deployed, copy the generated URL (e.g., `https://zum-backend-production.up.railway.app`)
+
+6. **Update Frontend Environment Variables:**
+   - Go back to Vercel dashboard
+   - Update the environment variables:
+     - `VITE_API_BASE_URL`: `https://zum-backend-production.up.railway.app`
+     - `VITE_BACKEND_URL`: `https://zum-backend-production.up.railway.app`
+   - Redeploy frontend: `vercel --prod`
+
+7. **Test the Deployment:**
+   - Visit your Vercel frontend URL
+   - Try registering/logging in
+   - Test ride requests and real-time features
 
 ### Alternative: Deploy Both to Vercel (Limited Socket.io)
 1. Deploy entire project: `vercel`
@@ -79,6 +112,25 @@ Since Socket.io requires persistent connections not well-supported on Vercel:
 - Set up custom domain if needed
 
 ## Troubleshooting
-- Socket.io issues: Consider using alternatives like Pusher or Firebase for real-time features
-- Database connection: Ensure MongoDB Atlas IP whitelist includes Vercel's IPs
-- CORS: Update CORS settings for production URLs
+- **Backend Crashing**: Check Railway logs for error messages. Common issues:
+  - MongoDB connection string incorrect
+  - Missing environment variables
+  - Memory limits exceeded (Railway has limits)
+  - Database connection timeouts
+
+- **Health Check**: Use the `/api/health` endpoint to check:
+  - MongoDB connection status
+  - Socket.io availability
+  - Memory usage
+  - Server uptime
+
+- **Socket.io Issues**: Railway supports WebSockets, but ensure proper CORS settings
+- **Database Connection**: Ensure MongoDB Atlas IP whitelist includes Railway's IPs (0.0.0.0/0 for testing)
+- **CORS**: Update CORS settings for production URLs
+- **Memory Issues**: Monitor memory usage via health endpoint, consider optimizing if needed
+
+## Monitoring
+- Use Railway's built-in logs and metrics
+- Check Vercel analytics for frontend performance
+- Monitor MongoDB Atlas for database performance
+- Use the health check endpoint for automated monitoring
