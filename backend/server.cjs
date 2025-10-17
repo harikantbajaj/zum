@@ -35,10 +35,17 @@ app.use(cors({
 }));
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/ridex', {
-  serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
-})
-  .then(() => {
+const startServer = async () => {
+  try {
+    const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/Zum';
+
+    console.log('Connecting to MongoDB...');
+
+    // Connect to MongoDB
+    await mongoose.connect(mongoUri, {
+      serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
+    });
+
     console.log('Connected to MongoDB');
 
     // Make io accessible to route handlers
@@ -64,8 +71,10 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/ridex', {
       console.log(`Server running on port ${PORT}`);
       console.log(`SMS notifications: ${process.env.TWILIO_ACCOUNT_SID ? 'ENABLED' : 'DISABLED (dev mode)'}`);
     });
-  })
-  .catch(err => {
-    console.error('MongoDB connection error:', err);
-    process.exit(1); // Exit if DB connection fails
-  });
+  } catch (err) {
+    console.error('Server startup error:', err);
+    process.exit(1);
+  }
+};
+
+startServer();
