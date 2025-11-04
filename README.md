@@ -69,7 +69,9 @@ Whether you're a busy professional needing a quick commute, a traveler exploring
 - **Socket.io** - Real-time bidirectional communication
 - **JWT** - JSON Web Tokens for authentication
 - **bcryptjs** - Password hashing
-###Frontend Deployment
+
+
+Frontend Deployment
 https://zum-hazel.vercel.app/
 ### Development Tools
 - **ESLint** - Code linting
